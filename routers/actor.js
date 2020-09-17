@@ -37,7 +37,12 @@ module.exports = {
             if (!actor) return res.status(404).json();
             res.json(actor);
         });
-    },
+    },deleteOne: function (req, res) {
+            let actorID = new mongoose.Types.ObjectId(req.params.id);
+            Actor.findOneAndDelete({ _id: actorID}, function (err) {
+                if (err) return res.status(400).json(err);
+                res.json();
+            });
     },
     addMovie: function (req, res) {
         let movieID = new mongoose.Types.ObjectId(req.params.movieId);
